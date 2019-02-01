@@ -4,7 +4,10 @@ const Schema   = mongoose.Schema;
 const studentSchema = new Schema({
   firstName: String,
   lastName: String,
-  _campus: Schema.Types.ObjectId, // starts with `_` because it's an ObjectId (convention)
+  _campus: {  // starts with `_` because it's an ObjectId (convention)
+    type: Schema.Types.ObjectId,
+    ref: 'Campus' // Don't forget this line, otherwise populate won't work
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',
