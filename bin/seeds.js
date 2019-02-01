@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Campus = require('../models/Campus')
 const Student = require('../models/Student')
 const dataCampuses = require('./data-campuses') // Starts with './' because it's a file
+const dataStudents = require('./data-students') // Starts with './' because it's a file
 
 mongoose
   .connect('mongodb://localhost/iron-express-campus-students', {useNewUrlParser: true})
@@ -13,8 +14,12 @@ mongoose
   })
 
 Campus.deleteMany()
-  .then(() => Campus.create(dataCampuses))
-  .then(() => { // This then is executed when Campus.create is done
+  .then(() => Student.deleteMany())
+  .then(() => Campus.create(dataCampuses))  // This then is executed when Student.deleteMany is done
+  .then(() => {
+    return Student.create(dataStudents)
+  })
+  .then(() => {
     console.log('Done');
     mongoose.disconnect() // Close the connection to the db 
   })
