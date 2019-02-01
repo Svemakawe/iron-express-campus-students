@@ -17,7 +17,9 @@ Campus.deleteMany()
   .then(() => Student.deleteMany())
   .then(() => Campus.create(dataCampuses))  // This then is executed when Student.deleteMany is done
   .then(campusesDocs => {
+    // dataStudents is converted into an array of objects with an extra property: _campus
     return Student.create(dataStudents.map(dataStudent => ({
+      // The 2 next lines could be replaced by: ...dataStudent,
       firstName: dataStudent.firstName,
       lastName: dataStudent.lastName,
       _campus: campusesDocs[Math.floor(Math.random()*campusesDocs.length)]._id
