@@ -7,6 +7,7 @@ for (let i = 0; i < 10; i++) {
   students.push({
     firstName: rawData[randomIndex1].first,
     lastName: rawData[randomIndex2].last,
+    // _campus: anObjectId // this impossible because we don't know yet the possible ids for the Campus
   })
 }
 

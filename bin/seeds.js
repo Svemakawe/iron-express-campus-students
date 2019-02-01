@@ -16,8 +16,12 @@ mongoose
 Campus.deleteMany()
   .then(() => Student.deleteMany())
   .then(() => Campus.create(dataCampuses))  // This then is executed when Student.deleteMany is done
-  .then(() => {
-    return Student.create(dataStudents)
+  .then(campusesDocs => {
+    return Student.create(dataStudents.map(dataStudent => ({
+      firstName: dataStudent.firstName,
+      lastName: dataStudent.lastName,
+      _campus: campusesDocs[Math.floor(Math.random()*campusesDocs.length)]._id
+    })))
   })
   .then(() => {
     console.log('Done');
