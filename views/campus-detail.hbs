@@ -1,0 +1,11 @@
+<h1>Campus Detail</h1>
+
+<strong>City</strong>: {{campus.city}} <br>
+<strong>General Manager</strong>: {{campus.gm}} <br>
+
+<strong>Students:</strong>
+<ul>
+  {{#each students}}
+    <li>{{this.firstName}} {{this.lastName}}</li>
+  {{/each}}
+</ul>

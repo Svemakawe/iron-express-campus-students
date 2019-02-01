@@ -1,6 +1,6 @@
 <h1>Campuses</h1>
 <ul>
   {{#each campuses}}
-    <li>{{this.city}}</li>
+    <li><a href="/campuses/{{this._id}}">{{this.city}}</a></li>
   {{/each}}
 </ul>

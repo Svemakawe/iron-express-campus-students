@@ -16,9 +16,14 @@ router.get('/campuses', (req,res,next) => {
 })
 
 router.get('/campuses/:campusId', (req,res,next) => {
-  Campus.find()
-    .then(campuses => {
-      res.render('campuses', {campuses})
+  Promise.all([
+    Campus.findById(req.params.campusId),
+    Student.find({ _campus: req.params.campusId }),
+  ])
+    .then(values => { // .then triggered when both promises are resolved
+      let campus = values[0]
+      let students = values[1]
+      res.render('campus-detail', {campus,students})
     })
 })
 
