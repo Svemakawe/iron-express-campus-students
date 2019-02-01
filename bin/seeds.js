@@ -12,9 +12,11 @@ mongoose
     console.error('Error connecting to mongo', err)
   })
 
-Campus.create(dataCampuses)
-  .then(() => {
+Campus.deleteMany()
+  .then(() => Campus.create(dataCampuses))
+  .then(() => { // This then is executed when Campus.create is done
     console.log('Done');
+    mongoose.disconnect() // Close the connection to the db 
   })
   .catch(err => {
     console.log('Error:', err)
