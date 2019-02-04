@@ -1,6 +1,9 @@
 <h1>Students</h1>
 <ul>
   {{#each students}}
-    <li>{{this.firstName}} {{this.lastName}} from {{this._campus.city}}</li>
+    <li>
+      {{this.firstName}} {{this.lastName}} from {{this._campus.city}}
+      <a href="/edit-student/{{this._id}}">Edit</a>
+    </li>
   {{/each}}
 </ul>

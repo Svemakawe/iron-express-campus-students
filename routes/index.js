@@ -35,4 +35,29 @@ router.get('/students', (req,res,next) => {
     })
 })
 
+
+// UPDATE PAGES
+router.get('/edit-student/:studentId', (req,res,next) => {
+  Promise.all([
+    Campus.find(),
+    Student.findById(req.params.studentId)
+  ])
+    .then(([campuses,student]) => {
+      res.render('edit-student', {student, campuses})
+    })
+})
+
+router.post('/edit-student/:studentId', (req,res,next) => {
+  let { firstName, lastName, _campus } = req.body
+  Student.findByIdAndUpdate(req.params.studentId, {
+    firstName, 
+    lastName,
+    _campus
+  })
+    .then(() => {
+      res.redirect('/students')
+    })
+})
+
+
 module.exports = router;

@@ -50,6 +50,18 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+	console.log('TCL: arg1 arg2', typeof arg1, typeof arg2, arg1==arg2)
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+hbs.registerHelper('ifSameObjectId', function(arg1, arg2, options) {
+  return (arg1.equals(arg2)) ? options.fn(this) : options.inverse(this);
+});
+
+
+
+
 
 const index = require('./routes/index');
 app.use('/', index);
